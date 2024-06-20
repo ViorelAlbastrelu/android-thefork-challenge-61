@@ -24,16 +24,18 @@ Can you give him feedback on the architecture of his project ?
 You should point out the good things and the issues you found (at least 3 of each).
 
 **Good things :**
-- ...
-- ...
-- ...
+- Simplified app. POCs should be simple to get a concept out as soon as possible.
+- The app has separation of features into modules that will be easy to start actual work on it.
+- API module does not have any Android dependencies.
 
 **Issues :**
-- ...
-- ...
-- ...
-- ...
-- ...
+- MVP architecture has no contracts and is only based on concrete classes.
+- SearchPresenter is dependent on SearchActivity. There are a few issues here: 
+  - A chance to leak context. We should NOT hold references to context (even though the presenter is only initialised in the Activity and it's life is closely tied to it)
+  - Cannot be reused with other views. (Views should be separated with an interface to depend on abstractions not concretes - Dependency inversion principle)
+- SearchPresenter has a hard dependency on CoroutineDispatchers and cannot be tested. They should be parameters to be able to inject testCoroutineDispatcher in unit tests.
+- SearchPresenter has a hard dependency on Api class. User services should be injected into SearchPresenter constructor to allow mocking and testing.
+- Non-null assertion is a high risk of NPE, especially when asserting BE responses that we can't guarantee are non-null (SearchPresenter, line:16 ...response.body()!!)
 
 ### 2nd - Unit tests:
 
