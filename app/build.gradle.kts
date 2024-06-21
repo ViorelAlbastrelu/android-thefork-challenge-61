@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.thefork.challenge"
@@ -20,4 +20,5 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     implementation(project(":search"))
+    implementation(project(":user"))
 }

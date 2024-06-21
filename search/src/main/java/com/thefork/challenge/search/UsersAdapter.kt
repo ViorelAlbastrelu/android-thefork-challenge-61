@@ -2,13 +2,15 @@ package com.thefork.challenge.search
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.thefork.challenge.api.UserPreview
 
 class UsersAdapter(
-    private val users: List<UserPreview>
+    private val users: List<UserPreview>,
+    private val onClick: OnClickListener,
 ) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -16,9 +18,14 @@ class UsersAdapter(
         private val lastNameView = view.findViewById<TextView>(R.id.last_name_text_view)
         private val firstNameView = view.findViewById<TextView>(R.id.first_name_text_view)
 
-        fun bind(user: UserPreview) {
+        fun bind(user: UserPreview, onClick: OnClickListener) {
+            itemView.apply {
+                tag = user.id
+                setOnClickListener(onClick)
+            }
             lastNameView.text = user.lastName
             firstNameView.text = user.firstName
+
         }
     }
 
@@ -27,7 +34,7 @@ class UsersAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(users[position], onClick)
     }
 
     override fun getItemCount(): Int = users.size

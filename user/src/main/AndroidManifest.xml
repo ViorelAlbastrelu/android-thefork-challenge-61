@@ -4,7 +4,10 @@
 
     <application>
 
-        <activity android:name="com.thefork.challenge.user.UserActivity" />
+        <activity
+            android:name="com.thefork.challenge.user.UserActivity"
+            android:label="Profile"
+            />
 
     </application>
 

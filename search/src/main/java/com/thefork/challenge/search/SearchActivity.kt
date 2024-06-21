@@ -18,7 +18,9 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
     }
 
     override fun displayUsers(users: List<UserPreview>) {
-        findViewById<RecyclerView>(R.id.recycler_view).adapter = UsersAdapter(users)
+        findViewById<RecyclerView>(R.id.recycler_view).adapter = UsersAdapter(users) { view ->
+            navigateToUser(view.tag as String)
+        }
     }
 
     override fun displayError() {
@@ -27,10 +29,10 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
             .show()
     }
 
-    fun navigateToUser(user: UserPreview) {
+    private fun navigateToUser(userId: String) {
         startActivity(Intent().apply {
             setClassName("com.thefork.challenge", "com.thefork.challenge.user.UserActivity")
-            putExtra("USER_ID", user.id)
+            putExtra("USER_ID", userId)
         })
     }
 }
