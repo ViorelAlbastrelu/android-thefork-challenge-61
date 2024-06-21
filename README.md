@@ -65,10 +65,13 @@ As you can see, `UserActivity.kt` is opened using reflection (especially the cla
 Neige would like to improve the navigation but he doesn't want to create a dependency between `search` & `user`.
 
 Can you explain why ?
-> ...Your answer...
+> The drawback to using reflection is that there is no guarantee that user module exists.
+> The destination name or location could change and we could forget to update search module.
+> The argument USER_ID could also change and it need to be updated in both modules.
 
 Could you suggest a solution and even **implement** it ?
-> ...Your suggested solution...
+> In this particular scenario (without adding Navigation Component from Jetpack) the best solution would be to navigate with deeplink.
+> This will also allow us to navigate to that module through other means: links, notifications, other features.
 
 ### Congrats !!
 

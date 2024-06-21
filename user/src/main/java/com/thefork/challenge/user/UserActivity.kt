@@ -22,7 +22,7 @@ class UserActivity : AppCompatActivity() {
             setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
-        val selectedUserId = intent.getStringExtra("USER_ID")
+        val selectedUserId = intent.data?.getQueryParameter("userid")
         userViewModel.getUserById(selectedUserId)
 
         setContent {

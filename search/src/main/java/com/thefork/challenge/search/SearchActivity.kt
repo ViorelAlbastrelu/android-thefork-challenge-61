@@ -1,12 +1,14 @@
 package com.thefork.challenge.search
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.thefork.challenge.api.Api
 import com.thefork.challenge.api.UserPreview
+
 
 class SearchActivity : AppCompatActivity(), SearchScreen {
 
@@ -30,9 +32,9 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
     }
 
     private fun navigateToUser(userId: String) {
-        startActivity(Intent().apply {
-            setClassName("com.thefork.challenge", "com.thefork.challenge.user.UserActivity")
-            putExtra("USER_ID", userId)
-        })
+        val deepLinkUri = Uri.parse("thefork://challenge/profile?userid=$userId")
+        val intent = Intent(Intent.ACTION_VIEW, deepLinkUri)
+        startActivity(intent)
+
     }
 }
